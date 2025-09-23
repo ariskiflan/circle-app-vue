@@ -22,14 +22,7 @@ const handleLogin = async () => {
     console.log(res.data);
 
     if (res.status) {
-      const data = {
-        user: res.data.user,
-        token: res.data.token,
-      };
-
-      store.commit("authModules/SET_USER", data);
-
-      await store.dispatch("authModules/getProfile", data);
+      await store.dispatch("authModules/login", formInput.value);
 
       toast("Login Berhasil!", {
         timeout: 2000,
@@ -40,7 +33,11 @@ const handleLogin = async () => {
       router.push("/");
     }
   } catch (error) {
-    console.log(error);
+    toast(error.response.data.message, {
+      timeout: 2000,
+      position: POSITION.TOP_CENTER,
+      type: TYPE.ERROR,
+    });
   }
 };
 </script>

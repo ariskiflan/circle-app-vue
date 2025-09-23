@@ -1,4 +1,5 @@
 import { getProfile } from "../../services/call/profile";
+import { login } from "../../services/call/user";
 
 const userStr = localStorage.getItem("user");
 let savedUser = null;
@@ -36,6 +37,25 @@ export default {
     },
   },
   actions: {
+    // ✅ Login hanya simpan token
+    async login({ commit, dispatch }, data) {
+      try {
+        const res = await login(data);
+
+        commit("SET_USER", {
+          user: null,
+          token: res.data.token,
+        });
+
+        await dispatch("getProfile");
+
+        return res;
+      } catch (err) {
+        console.error("Login error:", err);
+        throw err;
+      }
+    },
+
     async getProfile({ commit, state }) {
       try {
         const res = await getProfile(state.token);

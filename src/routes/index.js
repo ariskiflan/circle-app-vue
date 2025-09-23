@@ -3,6 +3,9 @@ import RootLayouts from "../layouts/RootLayouts.vue";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import { POSITION, TYPE, useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const routes = [
   {
@@ -40,7 +43,11 @@ router.beforeEach((to, from, next) => {
 
   // kalau rute butuh login (meta.requiresAuth) tapi belum login
   if (to.meta.requiresAuth && !isLoggedIn) {
-    alert("⚠️ Harap login dulu!"); // kasih peringatan
+    toast("Silahkan Login!", {
+      timeout: 2000,
+      position: POSITION.TOP_CENTER,
+      type: TYPE.SUCCESS,
+    });
     next({ name: "Login" }); // redirect ke halaman login
   } else {
     // kalau sudah login atau rute tidak butuh login → lanjut
