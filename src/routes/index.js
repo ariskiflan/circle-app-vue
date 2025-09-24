@@ -3,7 +3,10 @@ import RootLayouts from "../layouts/RootLayouts.vue";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import ThreadDetail from "../views/ThreadDetail.vue";
+import MyProfile from "../views/MyProfile.vue";
 import { POSITION, TYPE, useToast } from "vue-toastification";
+import store from "../store/index";
 
 const toast = useToast();
 
@@ -18,19 +21,22 @@ const routes = [
         component: Home,
         meta: { requiresAuth: true },
       },
+      {
+        path: "/thread-detail/:id",
+        name: "Thread-Detail",
+        component: ThreadDetail,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/my-profile",
+        name: "My-Profile",
+        component: MyProfile,
+        meta: { requiresAuth: true },
+      },
     ],
   },
-
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-  },
+  { path: "/login", name: "Login", component: Login },
+  { path: "/register", name: "Register", component: Register },
 ];
 
 const router = createRouter({
@@ -39,18 +45,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = localStorage.getItem("token"); // cek apakah user sudah login
+  const isLoggedIn = store.getters["authModules/isAuthenticated"];
 
-  // kalau rute butuh login (meta.requiresAuth) tapi belum login
   if (to.meta.requiresAuth && !isLoggedIn) {
     toast("Silahkan Login!", {
       timeout: 2000,
       position: POSITION.TOP_CENTER,
       type: TYPE.SUCCESS,
     });
-    next({ name: "Login" }); // redirect ke halaman login
+    next({ name: "Login" });
   } else {
-    // kalau sudah login atau rute tidak butuh login → lanjut
     next();
   }
 });

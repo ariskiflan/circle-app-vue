@@ -23,7 +23,6 @@ export default {
   },
   mutations: {
     SET_USER(state, payload) {
-      console.log("SET_USER payload:", payload);
       state.user = payload.user;
       state.token = payload.token;
       localStorage.setItem("user", JSON.stringify(payload.user));
@@ -37,7 +36,6 @@ export default {
     },
   },
   actions: {
-    // ✅ Login hanya simpan token
     async login({ commit, dispatch }, data) {
       try {
         const res = await login(data);

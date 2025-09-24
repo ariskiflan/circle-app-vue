@@ -19,8 +19,6 @@ const handleLogin = async () => {
   try {
     const res = await login(formInput.value);
 
-    console.log(res.data);
-
     if (res.status) {
       await store.dispatch("authModules/login", formInput.value);
 

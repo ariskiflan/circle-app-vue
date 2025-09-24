@@ -1,7 +1,7 @@
 <script setup>
 import { assets } from "../assets/assets";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
@@ -21,16 +21,18 @@ const handleLogout = () => {
 
           <div>
             <ul className="flex flex-col gap-10">
-              <li
-                className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
-              >
-                <img className="w-10" :src="assets.Home" alt="" />
-                <p
-                  className="text-2xl text-white font-medium hover:font-bold cursor-pointer "
+              <RouterLink to="/">
+                <li
+                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  Home
-                </p>
-              </li>
+                  <img className="w-10" :src="assets.Home" alt="" />
+                  <p
+                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer "
+                  >
+                    Home
+                  </p>
+                </li>
+              </RouterLink>
 
               <li
                 className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
@@ -54,22 +56,24 @@ const handleLogout = () => {
                 </p>
               </li>
 
-              <li
-                className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
-              >
-                <img className="w-10" :src="assets.Profile" alt="" />
-                <p
-                  className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+              <RouterLink to="/my-profile">
+                <li
+                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  Profile
-                </p>
-              </li>
+                  <img className="w-10" :src="assets.Profile" alt="" />
+                  <p
+                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                  >
+                    Profile
+                  </p>
+                </li>
+              </RouterLink>
             </ul>
           </div>
 
           <div>
             <button
-              className="bg-[#04A51E] text-white w-full py-3 rounded-3xl text-2xl font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white]"
+              className="bg-[#04A51E] text-white w-full py-3 rounded-3xl text-2xl font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
             >
               Create Post
             </button>

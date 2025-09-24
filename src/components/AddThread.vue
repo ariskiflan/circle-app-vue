@@ -1,62 +1,113 @@
 <script setup>
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
+import { useStore } from "vuex"; // kalau pakai Vuex
+import { createThreads } from "../services/call/thread";
 import { assets } from "../assets/assets";
+
+const props = defineProps({
+  getThread: {
+    type: Function,
+    required: true,
+  },
+  threadId: {
+    type: Number,
+    default: null,
+  },
+});
+
+const postThreads = ref({
+  content: "",
+  image: null,
+  threadId: null,
+});
+const preview = ref([]);
+const inputRef = ref(null);
+
+const route = useRoute();
+const store = useStore();
+const user = computed(() => store.getters["authModules/currentUser"]);
+
+const handlePostThreads = async (e) => {
+  e.preventDefault();
+  try {
+    if (props.threadId) {
+      postThreads.value.threadId = props.threadId;
+    }
+
+    if (postThreads.value.content || postThreads.value.image) {
+      await createThreads(postThreads.value);
+      props.getThread();
+    }
+
+    postThreads.value = { content: "", image: null, threadId: null };
+    preview.value = [];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const handleImageChange = (e) => {
+  const files = e.target.files;
+  if (!files || !files.length) return;
+
+  const fileList = Array.from(files);
+  preview.value = fileList.map((file) => URL.createObjectURL(file));
+  postThreads.value.image = files;
+};
+
+const handleImage = () => {
+  inputRef.value?.click();
+};
 </script>
 
 <template>
-  <div>
-    <div class="border-b-2 border-gray-500 p-5 w-full flex flex-col gap-4">
-      <div class="flex items-center gap-5 w-full">
-        <div class="w-10 h-10 rounded-full overflow-hidden">
-          <img
-            :src="assets.Profile"
-            alt="avatar"
-            class="object-cover w-full
-          h-full"
-          />
-        </div>
-
-        <div class="flex-1 flex items-center gap-3">
-          <!-- Input teks -->
-          <input
-            type="text"
-            class="flex-1 text-xl text-white bg-transparent px-4 py-2 outline-none"
-            name="content"
-          />
-
-          <!-- Upload gambar -->
-          <button type="button">
-            <input
-              ref="inputRef"
-              type="file"
-              name="image"
-              multiple
-              class="hidden"
-            />
-            <img :src="assets.GaleryAdd" alt="" class="w-8 cursor-pointer" />
-          </button>
-
-          <!-- Tombol Post -->
-          <button
-            type="submit"
-            class="bg-[#04A51E] text-white px-6 py-2 rounded-3xl text-sm font-medium
-                 hover:bg-transparent transition-all duration-100 ease-in-out
-                 hover:[box-shadow:inset_0_0_0_2px_white]"
-          >
-            Post
-          </button>
-        </div>
+  <div class="border-b-2 border-gray-500 p-5 w-full flex flex-col gap-4">
+    <div class="flex items-center gap-5 w-full">
+      <!-- <router-link :to="`/profile/${user?.userId}`"> -->
+      <div class="w-10 h-10 rounded-full object-cover overflow-hidden">
+        <img :src="user?.avatar || assets.Profile" alt="avatar" />
       </div>
+      <!-- </router-link> -->
 
-      <!-- Preview gambar -->
-      <!-- <div v-if="preview?.length" class="grid grid-cols-2 gap-2">
-        <img
-          v-for="(item, i) in preview"
-          :key="i"
-          :src="item"
-          class="w-full"
-          alt="preview"
+      <div class="flex-1 flex items-center gap-3">
+        <input
+          v-model="postThreads.content"
+          type="text"
+          class="flex-1 text-xl text-white bg-transparent px-4 py-2 outline-none"
+          :placeholder="
+            route.path === '/' ? `What's on your mind?` : 'Type Your Reply'
+          "
         />
-      </div> -->
+
+        <button @click="handleImage" type="button">
+          <!-- ✅ File input tidak bisa langsung v-model,
+               tapi kita bisa tetap simpan ke postThreads.image via @change -->
+          <input
+            multiple
+            name="image"
+            ref="inputRef"
+            type="file"
+            class="hidden"
+            @change="handleImageChange"
+          />
+          <img :src="assets.GaleryAdd" alt="" class="w-8 cursor-pointer" />
+        </button>
+
+        <button
+          @click="handlePostThreads"
+          type="submit"
+          class="bg-[#04A51E] text-white px-6 py-2 rounded-3xl text-sm font-medium hover:bg-transparent transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
+        >
+          Post
+        </button>
+      </div>
+    </div>
+
+    <div v-if="preview.length" class="grid grid-cols-2 gap-2 mt-2">
+      <div v-for="(item, index) in preview" :key="index">
+        <img class="w-full" :src="item" alt="preview" />
+      </div>
     </div>
   </div>
 </template>
