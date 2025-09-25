@@ -1,5 +1,6 @@
 <script setup>
 import { assets } from "../assets/assets";
+import { Icon } from "@iconify/vue";
 </script>
 
 <template>
@@ -11,11 +12,15 @@ import { assets } from "../assets/assets";
         </p>
         <div className="w-2 h-2 rounded-full bg-gray-400"></div>
         <div className="flex gap-3 items-center">
-          <div>1</div>
           <div>
-            2
+            <Icon icon="mdi:instagram" width="24" height="24" />
           </div>
-          <div>3</div>
+          <div>
+            <Icon icon="mdi:github" width="24" height="24" />
+          </div>
+          <div>
+            <Icon icon="ic:baseline-facebook" width="24" height="24" />
+          </div>
         </div>
       </div>
 

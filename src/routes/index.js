@@ -5,6 +5,9 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import ThreadDetail from "../views/ThreadDetail.vue";
 import MyProfile from "../views/MyProfile.vue";
+import Search from "../views/Search.vue";
+import Profile from "../views/Profile.vue";
+import Follows from "../views/Follows.vue";
 import { POSITION, TYPE, useToast } from "vue-toastification";
 import store from "../store/index";
 
@@ -31,6 +34,24 @@ const routes = [
         path: "/my-profile",
         name: "My-Profile",
         component: MyProfile,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/search",
+        name: "Search",
+        component: Search,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/profile/:id",
+        name: "Profile",
+        component: Profile,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "/follows",
+        name: "Follows",
+        component: Follows,
         meta: { requiresAuth: true },
       },
     ],

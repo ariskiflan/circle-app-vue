@@ -1,5 +1,22 @@
 <script setup>
 import SuggestedItem from "./SuggestedItem.vue";
+import { ref, onMounted } from "vue";
+import { getUsersNotId } from "../services/call/user";
+
+const suggestedUsers = ref([]);
+
+const handleSuggestedUser = async () => {
+  try {
+    const res = await getUsersNotId();
+    suggestedUsers.value = res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+onMounted(() => {
+  handleSuggestedUser();
+});
 </script>
 
 <template>
@@ -10,8 +27,8 @@ import SuggestedItem from "./SuggestedItem.vue";
       <div
         className="flex flex-col gap-5 h-[190px] overflow-auto hide-scrollbar"
       >
-        <div>
-          <SuggestedItem />
+        <div v-for="item in suggestedUsers" :key="item.id">
+          <SuggestedItem :suggestedUsers="item" />
         </div>
       </div>
     </div>

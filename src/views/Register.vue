@@ -1,5 +1,41 @@
 <script setup>
 import { assets } from "../assets/assets";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { POSITION, TYPE, useToast } from "vue-toastification";
+import { register } from "../services/call/user";
+
+const router = useRouter();
+const toast = useToast();
+
+const formInput = ref({
+  username: "",
+  fullname: "",
+  email: "",
+  password: "",
+});
+
+const handleRegister = async () => {
+  try {
+    const res = await register(formInput.value);
+
+    if (res.status) {
+      toast("Register Berhasil!", {
+        timeout: 2000,
+        position: POSITION.TOP_CENTER,
+        type: TYPE.SUCCESS,
+      });
+
+      router.push("/login");
+    }
+  } catch (error) {
+    toast(error.response.data.message, {
+      timeout: 2000,
+      position: POSITION.TOP_CENTER,
+      type: TYPE.ERROR,
+    });
+  }
+};
 </script>
 
 <template>
@@ -11,30 +47,37 @@ import { assets } from "../assets/assets";
           <p className="text-4xl font-semibold">Create Account Circle</p>
         </div>
 
-        <form className="flex flex-col gap-5 w-full">
+        <form
+          @submit.prevent="handleRegister"
+          className="flex flex-col gap-5 w-full"
+        >
           <input
             className="border-2 px-4 py-2 rounded-xl w-full"
             type="text"
             placeholder="Username"
             name="username"
+            v-model="formInput.username"
           />
           <input
             className="border-2 px-4 py-2 rounded-xl w-full"
             type="text"
             placeholder="Fullname"
             name="fullname"
+            v-model="formInput.fullname"
           />
           <input
             className="border-2 px-4 py-2 rounded-xl w-full"
             type="text"
             placeholder="Email"
             name="email"
+            v-model="formInput.email"
           />
           <input
             className="border-2 px-4 py-2 rounded-xl w-full"
             type="password"
             placeholder="Password"
             name="password"
+            v-model="formInput.password"
           />
 
           <button

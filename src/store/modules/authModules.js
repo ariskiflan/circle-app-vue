@@ -1,5 +1,6 @@
 import { getProfile } from "../../services/call/profile";
 import { login } from "../../services/call/user";
+import { getUser } from "../../services/call/user";
 
 const userStr = localStorage.getItem("user");
 let savedUser = null;
@@ -16,10 +17,12 @@ export default {
   state: {
     user: savedUser,
     token: savedToken || "",
+    userById: {},
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
     currentUser: (state) => state.user,
+    userById: (state) => state.userById,
   },
   mutations: {
     SET_USER(state, payload) {
@@ -27,6 +30,9 @@ export default {
       state.token = payload.token;
       localStorage.setItem("user", JSON.stringify(payload.user));
       localStorage.setItem("token", payload.token);
+    },
+    SET_USER_BY_ID(state, payload) {
+      state.userById = payload;
     },
     LOGOUT(state) {
       state.user = undefined;
@@ -64,6 +70,16 @@ export default {
         });
       } catch (err) {
         commit("SET_USER", { user: undefined, token: "" });
+      }
+    },
+
+    async getUserById({ commit }, id) {
+      try {
+        const res = await getUser(id);
+
+        commit("SET_USER_BY_ID", res.data);
+      } catch (error) {
+        console.log(error);
       }
     },
   },

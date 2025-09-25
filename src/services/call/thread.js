@@ -8,8 +8,6 @@ export const getThreads = async () => {
 export const createThreads = async (data) => {
   const formData = new FormData();
 
-  console.log(data, "DATA");
-
   if (data.image !== null) {
     for (let i = 0; i < data.image.length; i++) {
       formData.append("image", data.image[i]);

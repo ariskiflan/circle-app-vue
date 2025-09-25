@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { createLike, getCurrentLike } from "../services/call/like";
 import { Icon } from "@iconify/vue";
+import { useStore } from "vuex";
 
 const props = defineProps({
   threadId: {
@@ -15,6 +16,7 @@ const props = defineProps({
 });
 
 const like = ref(false);
+const store = useStore();
 
 const getLikes = async () => {
   try {

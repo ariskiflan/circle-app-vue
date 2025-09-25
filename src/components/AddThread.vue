@@ -8,7 +8,6 @@ import { assets } from "../assets/assets";
 const props = defineProps({
   getThread: {
     type: Function,
-    required: true,
   },
   threadId: {
     type: Number,
@@ -38,6 +37,7 @@ const handlePostThreads = async (e) => {
     if (postThreads.value.content || postThreads.value.image) {
       await createThreads(postThreads.value);
       props.getThread();
+      await store.dispatch("threadModules/getThreads");
     }
 
     postThreads.value = { content: "", image: null, threadId: null };

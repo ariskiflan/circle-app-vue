@@ -34,27 +34,31 @@ const handleLogout = () => {
                 </li>
               </RouterLink>
 
-              <li
-                className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
-              >
-                <img className="w-10" :src="assets.UserSearch" alt="" />
-                <p
-                  className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+              <RouterLink to="/search">
+                <li
+                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  Search
-                </p>
-              </li>
+                  <img className="w-10" :src="assets.UserSearch" alt="" />
+                  <p
+                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                  >
+                    Search
+                  </p>
+                </li>
+              </RouterLink>
 
-              <li
-                className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
-              >
-                <img className="w-10" :src="assets.Like" alt="" />
-                <p
-                  className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+              <RouterLink to="/follows">
+                <li
+                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  Follows
-                </p>
-              </li>
+                  <img className="w-10" :src="assets.Like" alt="" />
+                  <p
+                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                  >
+                    Follows
+                  </p>
+                </li>
+              </RouterLink>
 
               <RouterLink to="/my-profile">
                 <li

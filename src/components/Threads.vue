@@ -15,7 +15,6 @@ const { thread, handleGetThreads } = defineProps({
   },
   handleGetThreads: {
     type: Function,
-    required: true,
   },
 });
 
@@ -36,6 +35,12 @@ const handleDeletethread = async () => {
     console.log(error);
   }
 };
+
+const handleRedirectProfile = () => {
+  return user.value.id != thread.author.id
+    ? `/profile/${thread.author.id}`
+    : "/my-profile";
+};
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const handleDeletethread = async () => {
     <div class="border-b-2 border-gray-500">
       <div class="p-5">
         <div class="flex gap-5 relative">
-          <router-link to="/profile">
+          <RouterLink :to="handleRedirectProfile()">
             <div class="w-10 h-10 rounded-full overflow-hidden">
               <img
                 class="object-cover w-full h-full"
@@ -51,7 +56,7 @@ const handleDeletethread = async () => {
                 alt="avatar"
               />
             </div>
-          </router-link>
+          </RouterLink>
 
           <div class="flex flex-col gap-3">
             <div class="flex gap-3 items-center">
