@@ -1,6 +1,8 @@
 <script setup>
 import { assets } from "../assets/assets";
 import { Icon } from "@iconify/vue";
+
+const year = new Date().getFullYear();
 </script>
 
 <template>
@@ -33,7 +35,7 @@ import { Icon } from "@iconify/vue";
 
         <div className="w-2 h-2 rounded-full bg-gray-400"></div>
 
-        <span>2025</span>
+        <span>{{year}}</span>
       </div>
     </div>
   </div>

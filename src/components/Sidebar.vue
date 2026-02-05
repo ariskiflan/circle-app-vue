@@ -14,20 +14,20 @@ const handleLogout = () => {
 
 <template>
   <div>
-    <div className=" h-screen border-r-2 border-gray-500">
-      <div className="p-10 flex flex-col gap-10 h-full justify-between">
-        <div className="flex flex-col gap-10">
-          <img className="w-58" :src="assets.Logo" alt="" />
+    <div class=" h-screen md:border-r-2 border-gray-500">
+      <div class="p-10 flex flex-col gap-10 h-full justify-between">
+        <div class="flex flex-col gap-10">
+          <img class="md:w-58 w-40" :src="assets.Logo" alt="" />
 
           <div>
-            <ul className="flex flex-col gap-10">
+            <ul class="flex flex-col gap-10">
               <RouterLink to="/">
                 <li
-                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
+                  class="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  <img className="w-10" :src="assets.Home" alt="" />
+                  <img class="md:w-10 w-8" :src="assets.Home" alt="" />
                   <p
-                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer "
+                    class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer "
                   >
                     Home
                   </p>
@@ -36,11 +36,11 @@ const handleLogout = () => {
 
               <RouterLink to="/search">
                 <li
-                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
+                  class="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  <img className="w-10" :src="assets.UserSearch" alt="" />
+                  <img class="md:w-10 w-8" :src="assets.UserSearch" alt="" />
                   <p
-                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                    class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer"
                   >
                     Search
                   </p>
@@ -49,11 +49,11 @@ const handleLogout = () => {
 
               <RouterLink to="/follows">
                 <li
-                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
+                  class="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  <img className="w-10" :src="assets.Like" alt="" />
+                  <img class="md:w-10 w-8" :src="assets.Like" alt="" />
                   <p
-                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                    class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer"
                   >
                     Follows
                   </p>
@@ -62,11 +62,11 @@ const handleLogout = () => {
 
               <RouterLink to="/my-profile">
                 <li
-                  className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
+                  class="flex items-center gap-5 hover:translate-1 transition-all duration-100"
                 >
-                  <img className="w-10" :src="assets.Profile" alt="" />
+                  <img class="md:w-10 w-8" :src="assets.Profile" alt="" />
                   <p
-                    className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+                    class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer"
                   >
                     Profile
                   </p>
@@ -77,7 +77,7 @@ const handleLogout = () => {
 
           <div>
             <button
-              className="bg-[#04A51E] text-white w-full py-3 rounded-3xl text-2xl font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
+              class="bg-[#04A51E] text-white w-full py-3 rounded-3xl md:text-2xl text-xll font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
             >
               Create Post
             </button>
@@ -86,11 +86,11 @@ const handleLogout = () => {
 
         <div
           @click="handleLogout"
-          className="flex items-center gap-5 hover:translate-1 transition-all duration-100"
+          class="flex items-center gap-5 hover:translate-1 transition-all duration-100"
         >
-          <img className="w-10" :src="assets.Logout" alt="" />
+          <img class="md:w-10 w-8" :src="assets.Logout" alt="" />
           <p
-            className="text-2xl text-white font-medium hover:font-bold cursor-pointer"
+            class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer"
           >
             Logout
           </p>

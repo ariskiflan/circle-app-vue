@@ -29,6 +29,7 @@ const handleLogin = async () => {
       });
 
       router.push("/");
+
     }
   } catch (error) {
     toast(error.response.data.message, {
