@@ -31,7 +31,7 @@ const handleChange = () => {
     const keyword = input.value.toLowerCase();
     searchResult.value = users.value.filter((user) =>
       user.username.toLowerCase().includes(keyword)
-    );
+    );    
   }
 };
 
@@ -45,7 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="px-5 py-10 flex flex-col gap-5">
+  <div class="px-5 py-10 flex flex-col gap-10">
     <div class="flex items-center gap-3 justify-between">
         <Icon icon="mdi:arrow-back" 
           width="40" 
@@ -93,7 +93,7 @@ onMounted(() => {
       </template>
 
       <template v-else>
-        <div class="flex items-center gap-5 justify-center h-screen">
+        <div class="flex items-center gap-5 justify-center">
           <div class="flex flex-col gap-2 items-center">
             <p class="text-xl md:text-2xl font-semibold">No Result for "{{ input }}"</p>
             <p class="text-sm md:text-md font-normal text-[#b3b3b3]">

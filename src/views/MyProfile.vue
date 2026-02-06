@@ -25,6 +25,10 @@ const handleGetThreadsByUserToken = async () => {
   }
 };
 
+const handleFollows = () => {
+  router.push("/follows");
+}
+
 onMounted(() => {
   handleGetThreadsByUserToken();
 });
@@ -72,16 +76,15 @@ onMounted(() => {
             >@{{ user?.user.username }}</span
           >
           <p class="text-md font-normal">{{ user?.bio }}</p>
-
-          <div class="flex items-center gap-5">
+          <div class="flex items-center gap-5" @click="handleFollows">
             <p class="text-sm md:text-md font-semibold">
-              {{ user?.user?.follower?.length }}
-              <span class="text-gray-400 font-normal text-sm md:text-md">Followers</span>
+                {{ user?.user?.following?.length }}
+              <span class="text-gray-400 font-normal text-sm md:text-md">Followings</span>
             </p>
 
             <p class="text-sm md:text-md font-semibold">
-              {{ user?.user?.following?.length }}
-              <span class="text-gray-400 font-normal text-sm md:text-md">Followings</span>
+                {{ user?.user?.follower?.length }}
+              <span class="text-gray-400 font-normal text-sm md:text-md"> Followers</span>
             </p>
           </div>
         </div>

@@ -11,31 +11,16 @@ export const login = async (data) => {
 };
 
 export const getUsers = async () => {
-  const res = await api.get("user", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get("user");
   return res.data;
 };
 
 export const getUser = async (id) => {
-  const res = await api.get(`user/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get(`user/${id}`);
   return res.data;
 };
 
 export const getUsersNotId = async () => {
-  const res = await api.get("suggested", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get("suggested");
   return res.data;
 };

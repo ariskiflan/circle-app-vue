@@ -1,22 +1,12 @@
 import api from "..";
 
 export const getFollower = async () => {
-  const res = await api.get("follower", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get("follower");
   return res.data;
 };
 
 export const getFollowing = async () => {
-  const res = await api.get("following", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get("following");
   return res.data;
 };
 
@@ -25,11 +15,6 @@ export const createFollow = async (followingId) => {
     "follow",
     {
       followingId,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`,
-      },
     }
   );
 

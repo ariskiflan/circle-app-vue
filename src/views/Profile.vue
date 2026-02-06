@@ -6,6 +6,7 @@ import Threads from "../components/Threads.vue";
 import { useStore } from "vuex";
 import { Icon } from '@iconify/vue';
 import { useRouter } from "vue-router";
+import ButtonFollows from "../components/ButtonFollows.vue";
 
 
 const router = useRouter();
@@ -24,6 +25,10 @@ const getProfile = async () => {
   await store.dispatch("authModules/getUserById", id);
   await store.dispatch("threadModules/getThreadByUserId", id);
 };
+
+const handleFollows = () => {
+  router.push("/follows");
+}
 
 onMounted(async () => {
   await getProfile();
@@ -53,14 +58,18 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 mt-7 md:mt-10">
+        <div class="flex justify-end mt-5 md:mt-10">
+           <ButtonFollows :follows="userById" />
+        </div>
+
+        <div class="flex flex-col gap-2">
           <p class="text-xl md:text-2xl font-semibold">{{ userById?.fullname }}</p>
           <span class="text-gray-400 font-semibold text-md">
             @{{ userById?.username }}
           </span>
           <p class="text-md font-normal">{{ userById?.profile?.bio }}</p>
 
-          <div class="flex items-center gap-5">
+          <div class="flex items-center gap-5" @click="handleFollows">
             <p class="text-sm md:text-md font-semibold">
               {{ userById?.following?.length }}
               <span class="text-gray-400 font-normal">Following</span>

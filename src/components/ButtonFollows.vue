@@ -22,6 +22,7 @@ const handleCreateFollows = async () => {
     isFollowing.value = !isFollowing.value;
 
     await store.dispatch("authModules/getProfile", token);
+    await store.dispatch("authModules/getUserById", props.follows.id);
     store.dispatch("followsModules/getFollowing");
     store.dispatch("followsModules/getFollower");
   } catch (err) {
@@ -31,7 +32,8 @@ const handleCreateFollows = async () => {
 
 const checkIsFollowing = () => {
   try {
-    const followings = user.value?.user?.follower?.find(
+    // ✅ BENAR: Cek di user.following untuk followingId
+    const followings = user.value?.user?.following?.find(
       (f) => f.followingId === props.follows.id
     );
     isFollowing.value = !!followings;

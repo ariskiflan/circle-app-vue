@@ -4,7 +4,7 @@ import Rightbar from "../components/Rightbar.vue";
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-[35%_65%] xl:grid-cols-[20%_50%_30%]">
+  <div class="grid md:grid-cols-[35%_65%] xl:grid-cols-[20%_50%_30%]">
 
     <!-- Sidebar -->
     <div class="hidden md:block sticky top-0 h-screen">
@@ -17,7 +17,7 @@ import Rightbar from "../components/Rightbar.vue";
     </main>
 
     <!-- Rightbar -->
-    <div class="hidden lg:block sticky top-0 h-screen">
+    <div class="hidden xl:block sticky top-0 h-screen">
       <Rightbar />
     </div>
 

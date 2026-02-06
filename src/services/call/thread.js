@@ -20,68 +20,31 @@ export const createThreads = async (data) => {
 
   formData.append("content", data.content);
 
-  // const res = await api.post("thread", formData, {
-  //   headers: {
-  //     "Content-Type": "multipart/form-data",
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   },
-  // });
-
-  const res = await api.post("thread", formData, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.post("thread", formData);
   return res.data;
 };
 
 export const getThreadById = async (id) => {
-  const res = await api.get(`thread/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get(`thread/${id}`);
   return res.data;
 };
 
 export const getThreadByUserId = async (id) => {
-  const res = await api.get(`threadByUserId/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get(`threadByUserId/${id}`);
   return res.data;
 };
 
 export const getThreadByToken = async () => {
-  const res = await api.get("threadByToken", {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get("threadByToken");
   return res.data;
 };
 
 export const getReplies = async (id) => {
-  const res = await api.get(`replies/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.get(`replies/${id}`);
   return res.data;
 };
 
 export const deleteThread = async (id) => {
-  const res = await api.delete(`deleteThread/${id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
-
+  const res = await api.delete(`deleteThread/${id}`);
   return res.data;
 };
