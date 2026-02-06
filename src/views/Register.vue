@@ -41,10 +41,10 @@ const handleRegister = async () => {
 <template>
   <div>
     <div>
-      <div className="flex flex-col h-screen justify-center w-1/3 m-auto gap-5">
+      <div className="flex flex-col h-screen justify-center w-full md:w-1/3 m-auto gap-5 p-10 md:p-0">
         <div className="flex flex-col gap-5">
-          <img :src="assets.Logo" alt="" className="w-64" />
-          <p className="text-4xl font-semibold">Create Account Circle</p>
+          <img :src="assets.Logo" alt="" className="w-40 md:w-64" />
+          <p className="text-xl md:text-4xl font-semibold">Create Account Circle</p>
         </div>
 
         <form
@@ -52,28 +52,28 @@ const handleRegister = async () => {
           className="flex flex-col gap-5 w-full"
         >
           <input
-            className="border-2 px-4 py-2 rounded-xl w-full"
+            className="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
             type="text"
             placeholder="Username"
             name="username"
             v-model="formInput.username"
           />
           <input
-            className="border-2 px-4 py-2 rounded-xl w-full"
+            className="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
             type="text"
             placeholder="Fullname"
             name="fullname"
             v-model="formInput.fullname"
           />
           <input
-            className="border-2 px-4 py-2 rounded-xl w-full"
+            className="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
             type="text"
             placeholder="Email"
             name="email"
             v-model="formInput.email"
           />
           <input
-            className="border-2 px-4 py-2 rounded-xl w-full"
+            className="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
             type="password"
             placeholder="Password"
             name="password"
@@ -82,14 +82,14 @@ const handleRegister = async () => {
 
           <button
             type="submit"
-            className="bg-[#04A51E] text-white w-full py-2 rounded-3xl text-xl font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
+            className="bg-[#04A51E] text-white w-full py-2 rounded-3xl text-md md:text-xl font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
           >
             Create
           </button>
         </form>
 
         <div>
-          <p>
+          <p class="text-md md:text-xl">
             Already have an acount?
             <RouterLink to="/login" className="text-[#04A51E] cursor-pointer">
               Sign in

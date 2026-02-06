@@ -42,24 +42,24 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen justify-center w-1/3 m-auto gap-5">
+  <div class="flex flex-col h-screen justify-center w-full md:w-1/3 m-auto gap-5 p-10 md:p-0">
     <div class="flex flex-col gap-5">
-      <img :src="assets.Logo" alt="" class="w-64" />
-      <p class="text-4xl font-semibold">Login to Circle</p>
+      <img :src="assets.Logo" alt="" class="w-40 md:w-64" />
+      <p class="text-xl md:text-4xl font-semibold">Login to Circle</p>
     </div>
 
     <!-- FORM -->
     <form class="flex flex-col gap-5 w-full" @submit.prevent="handleLogin">
       <input
         v-model="formInput.username"
-        class="border-2 px-4 py-2 rounded-xl w-full"
+        class="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
         type="text"
         placeholder="Username"
         name="username"
       />
       <input
         v-model="formInput.password"
-        class="border-2 px-4 py-2 rounded-xl w-full"
+        class="border-2 px-4 py-2 rounded-xl w-full text-md md:text-xl"
         type="password"
         placeholder="Password"
         name="password"
@@ -67,7 +67,7 @@ const handleLogin = async () => {
 
       <button
         type="submit"
-        class="bg-[#04A51E] text-white w-full py-2 rounded-3xl text-xl font-medium
+        class="bg-[#04A51E] text-white w-full py-2 rounded-3xl text-md md:text-xl font-medium
                hover:bg-transparent transition-all duration-100 ease-in-out
                hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
       >
@@ -76,7 +76,7 @@ const handleLogin = async () => {
     </form>
 
     <div>
-      <p>
+      <p class="text-md md:text-xl">
         Don’t have an account yet?
         <RouterLink to="/register" class="text-[#04A51E] cursor-pointer">
           Sign up

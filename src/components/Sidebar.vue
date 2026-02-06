@@ -75,13 +75,13 @@ const handleLogout = () => {
             </ul>
           </div>
 
-          <div>
+          <!-- <div>
             <button
               class="bg-[#04A51E] text-white w-full py-3 rounded-3xl md:text-2xl text-xll font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
             >
               Create Post
             </button>
-          </div>
+          </div> -->
         </div>
 
         <div

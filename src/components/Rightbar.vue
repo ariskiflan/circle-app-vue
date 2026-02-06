@@ -8,7 +8,7 @@ const router = useRoute();
 </script>
 
 <template>
-  <div>
+  <div class="hidden lg:block">
     <div className="text-white h-screen border-l-2 border-gray-500 p-10">
       <div className="flex flex-col gap-5">
         <div v-if="router.path != '/my-profile'">

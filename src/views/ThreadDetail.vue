@@ -7,6 +7,7 @@ import AddThread from "../components/AddThread.vue";
 import Threads from "../components/Threads.vue";
 import { getThreadById, getReplies } from "../services/call/thread";
 import formatTime from "../utils/formatTime";
+import { Icon } from '@iconify/vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -34,15 +35,15 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="px-5 py-10">
+    <div class="px-5 pt-10 pb-5 md:pb-0 md-pt-0 md:py-10">
       <div class="flex gap-3 items-center">
-        <img
-          class="w-10 cursor-pointer"
-          :src="assets.Back"
-          alt="back"
+        <Icon icon="mdi:arrow-back" 
+          width="40" 
+          height="40" 
+          class="cursor-pointer"
           @click="router.push('/')"
-        />
-        <p class="text-3xl font-semibold">Status</p>
+       ></Icon>
+        <p class="text-xl md:text-3xl font-semibold">Status</p>
       </div>
     </div>
 
@@ -57,14 +58,14 @@ onMounted(() => {
 
           <div class="flex flex-col gap-3">
             <div class="flex gap-3 items-center">
-              <p class="font-bold text-xl">
+              <p class="font-bold text-md md:text-xl">
                 {{ threadDetail?.author?.fullname }}
               </p>
               <p class="text-gray-400 text-md font-semibold">
                 {{ threadDetail?.author?.username }}
               </p>
-              <div class="w-2 h-2 rounded-full bg-gray-400"></div>
-              <p class="text-gray-400 text-md font-semibold">
+              <div class="w-1 h-1 md:w-2 md:h-2 rounded-full bg-gray-400"></div>
+              <p class="text-gray-400 text-sm md:text-md font-semibold">
                 {{
                   threadDetail?.posted_at && formatTime(threadDetail.posted_at)
                 }}
@@ -92,14 +93,14 @@ onMounted(() => {
                   :threadId="id"
                   :handleGetThreads="handleGetThreadDetail"
                 />
-                <span class="text-md text-gray-400 font-medium">
-                  {{ threadDetail?._count?.like }}
+                <span class="text-sm md:text-md text-gray-400 font-medium">
+                  {{ threadDetail?._count?.like }} Likes
                 </span>
               </div>
 
               <div class="flex gap-2 items-center">
-                <img :src="assets.Reply" class="w-6" alt="" />
-                <span class="text-md text-gray-400 font-medium">
+                <img :src="assets.Reply" class="w-5 md:w-6" alt="" />
+                <span class="text-sm md:text-md text-gray-400 font-medium">
                   {{ threadDetail?._count?.replies }} Replies
                 </span>
               </div>

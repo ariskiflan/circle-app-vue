@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import ListFollows from "../components/ListFollows.vue";
+import { Icon } from "@iconify/vue";
 
+const router = useRouter();
 const store = useStore();
 const activeTab = ref("followers");
 
@@ -19,12 +22,22 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="grid grid-cols-2 justify-center items-center py-10">
+    <div class="pt-4 px-4 md:hidden">
+       <Icon icon="mdi:arrow-back" 
+          width="40" 
+          height="40" 
+          class="cursor-pointer"
+          @click="router.push('/')"
+       ></Icon>
+    </div>
+   
+
+    <div class="grid grid-cols-2 justify-center items-center py-5 md:py-10">
       <p
         @click="activeTab = 'followers'"
-        class="relative text-xl cursor-pointer px-4 py-2 text-center border-b-2"
+        class="relative text-md md:text-xl cursor-pointer px-4 py-2 text-center border-b-2"
         :class="[
-          'relative text-xl cursor-pointer px-4 py-2 text-center border-b-2',
+          'relative text-md md:text-xl cursor-pointer px-4 py-2 text-center border-b-2',
           activeTab === 'followers'
             ? 'border-gray-500 font-bold text-white after:content-[\'\'] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[80%] after:h-1 after:bg-green-500 after:rounded-lg'
             : 'border-gray-500 font-normal',
@@ -35,9 +48,9 @@ onMounted(() => {
 
       <p
         @click="activeTab = 'following'"
-        class="relative text-xl cursor-pointer px-4 py-2 text-center border-b-2"
+        class="relative text-md md:text-xl cursor-pointer px-4 py-2 text-center border-b-2"
         :class="[
-          'relative text-xl cursor-pointer px-4 py-2 text-center border-b-2',
+          'relative text-md md:text-xl cursor-pointer px-4 py-2 text-center border-b-2',
           activeTab === 'following'
             ? 'border-gray-500 font-bold text-white after:content-[\'\'] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-[80%] after:h-1 after:bg-green-500 after:rounded-lg'
             : 'border-gray-500 font-normal',

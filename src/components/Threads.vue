@@ -47,9 +47,9 @@ const handleRedirectProfile = () => {
   <div>
     <div class="border-b-2 border-gray-500">
       <div class="p-5">
-        <div class="flex gap-5 relative">
+        <div class="flex gap-3 md:gap-5 relative">
           <RouterLink :to="handleRedirectProfile()">
-            <div class="w-10 h-10 rounded-full overflow-hidden">
+            <div class="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden">
               <img
                 class="object-cover w-full h-full"
                 :src="thread.author.profile.avatar || assets.Profile"
@@ -60,14 +60,14 @@ const handleRedirectProfile = () => {
 
           <div class="flex flex-col gap-3">
             <div class="flex gap-3 items-center">
-              <p class="font-semibold text-xl">
+              <p class="font-semibold text-md md:text-xl">
                 {{ thread.author.fullname }}
               </p>
               <p class="text-gray-400 text-md font-semibold">
                 @{{ thread.author.username }}
               </p>
-              <div class="w-2 h-2 rounded-full bg-gray-400"></div>
-              <p class="text-gray-400 text-md font-semibold">
+              <div class="w-1 h-1 md:w-2 md:h-2 rounded-full bg-gray-400"></div>
+              <p class="text-gray-400 text-sm md:text-md font-semibold">
                 {{ formatTime(thread.posted_at) }}
               </p>
             </div>
@@ -90,8 +90,8 @@ const handleRedirectProfile = () => {
                   :threadId="Number(thread.id)"
                   :handleGetThreads="handleGetThreads"
                 />
-                <span class="text-md text-gray-400 font-medium">
-                  {{ thread._count.like }}
+                <span class="text-sm md:text-md text-gray-400 font-medium">
+                  {{ thread._count.like }} Likes
                 </span>
               </div>
 
@@ -100,8 +100,8 @@ const handleRedirectProfile = () => {
                   :to="`/thread-detail/${thread.id}`"
                   className="flex gap-2 items-center"
                 >
-                  <img :src="assets.Reply" class="w-6" alt="" />
-                  <span class="text-md text-gray-400 font-medium">
+                  <img :src="assets.Reply" class="w-5 md:w-6" alt="" />
+                  <span class="text-sm md:text-md text-gray-400 font-medium">
                     {{ thread._count.replies }} Replies
                   </span>
                 </router-link>
