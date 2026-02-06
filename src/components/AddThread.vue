@@ -6,9 +6,9 @@ import { createThreads } from "../services/call/thread";
 import { assets } from "../assets/assets";
 
 const props = defineProps({
-  getThread: {
-    type: Function,
-  },
+  // getThread: {
+  //   type: Function,
+  // },
   threadId: {
     type: Number,
     default: null,
@@ -36,7 +36,7 @@ const handlePostThreads = async (e) => {
 
     if (postThreads.value.content || postThreads.value.image) {
       await createThreads(postThreads.value);
-      props.getThread();
+      // props.getThread();
       await store.dispatch("threadModules/getThreads");
     }
 

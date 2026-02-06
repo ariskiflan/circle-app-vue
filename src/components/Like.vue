@@ -9,10 +9,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  handleGetThreads: {
-    type: Function,
-    required: true,
-  },
+  // handleGetThreads: {
+  //   type: Function,
+  //   required: true,
+  // },
 });
 
 const like = ref(false);
@@ -22,7 +22,7 @@ const getLikes = async () => {
   try {
     const res = await getCurrentLike(props.threadId);
     like.value = res.data.like !== null;
-    props.handleGetThreads();
+    // props.handleGetThreads();
   } catch (err) {
     console.error(err);
   }
@@ -32,6 +32,11 @@ const handleLike = async () => {
   try {
     await createLike(props.threadId);
     await getLikes();
+    await store.dispatch("threadModules/getThreadByUserId", props.threadId);
+    await store.dispatch("threadModules/getThreadByUserToken");
+    await store.dispatch("threadModules/getThreads");
+    await store.dispatch("threadModules/getThreadDetail", props.threadId);
+
   } catch (err) {
     console.error(err);
   }

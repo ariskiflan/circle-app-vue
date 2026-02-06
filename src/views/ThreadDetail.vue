@@ -1,35 +1,28 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { assets } from "../assets/assets";
 import Like from "../components/Like.vue";
 import AddThread from "../components/AddThread.vue";
 import Threads from "../components/Threads.vue";
-import { getThreadById, getReplies } from "../services/call/thread";
 import formatTime from "../utils/formatTime";
 import { Icon } from '@iconify/vue';
+import { useStore } from "vuex";
 
+const store = useStore();
 const route = useRoute();
 const router = useRouter();
 const id = Number(route.params.id);
 
-const threadDetail = ref(null);
-const replies = ref([]);
-
-const handleGetThreadDetail = async () => {
-  try {
-    const res = await getThreadById(id);
-    const resReplies = await getReplies(id);
-
-    threadDetail.value = res.data;
-    replies.value = resReplies.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
+const threadDetail = computed(
+  () => store.getters["threadModules/threadDetail"]
+);
+const replies = computed(
+  () => store.getters["threadModules/replies"]
+);
 
 onMounted(() => {
-  handleGetThreadDetail();
+  store.dispatch("threadModules/getThreadDetail", route.params.id);
 });
 </script>
 
@@ -91,8 +84,9 @@ onMounted(() => {
               <div class="flex gap-2 items-center">
                 <Like
                   :threadId="id"
-                  :handleGetThreads="handleGetThreadDetail"
                 />
+                  <!-- :handleGetThreads="handleGetThreadDetail" -->
+
                 <span class="text-sm md:text-md text-gray-400 font-medium">
                   {{ threadDetail?._count?.like }} Likes
                 </span>
@@ -110,11 +104,13 @@ onMounted(() => {
       </div>
     </div>
 
-    <AddThread :getThread="handleGetThreadDetail" :threadId="id" />
+    <AddThread  :threadId="id" />
+    <!-- :getThread="handleGetThreadDetail" -->
 
     <div>
       <div v-for="item in replies" :key="item.id">
-        <Threads :thread="item" :handleGetThreads="handleGetThreadDetail" />
+        <Threads :thread="item"  />
+        <!-- :handleGetThreads="handleGetThreadDetail" -->
       </div>
     </div>
   </div>

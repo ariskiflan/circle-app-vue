@@ -12,25 +12,18 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const store = useStore();
 const user = computed(() => store.getters["authModules/currentUser"]);
+const threadsByUserToken = computed(
+  () => store.getters["threadModules/threadByUserToken"]
+);
 
-const threadsByUserToken = ref([]);
 const activeTab = ref("all");
-
-const handleGetThreadsByUserToken = async () => {
-  try {
-    const res = await getThreadByToken();
-    threadsByUserToken.value = res.data;
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const handleFollows = () => {
   router.push("/follows");
 }
 
 onMounted(() => {
-  handleGetThreadsByUserToken();
+  store.dispatch("threadModules/getThreadByUserToken");
 });
 </script>
 
@@ -121,8 +114,10 @@ onMounted(() => {
         <div v-for="item in threadsByUserToken" :key="item.id">
           <Threads
             :thread="item"
-            :handleGetThreads="handleGetThreadsByUserToken"
           />
+
+            <!-- :handleGetThreads="handleGetThreadsByUserToken" -->
+
         </div>
       </template>
 

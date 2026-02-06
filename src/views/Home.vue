@@ -68,7 +68,8 @@ onMounted(async () => {
 
       <div>
         <div v-for="item in threads" :key="item.id">
-          <Threads :thread="item" :handleGetThreads="getThreads" />
+          <Threads :thread="item"  />
+          <!-- :handleGetThreads="getThreads" -->
         </div>
       </div>
     </div>

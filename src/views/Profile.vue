@@ -111,7 +111,8 @@ onMounted(async () => {
     <div>
       <div v-if="activeTab === 'all'">
         <div v-for="item in threadsByUserId" :key="item.id">
-          <Threads :thread="item" :handleGetThreads="getProfile" />
+          <Threads :thread="item"  />
+          <!-- :handleGetThreads="getProfile" -->
         </div>
       </div>
 

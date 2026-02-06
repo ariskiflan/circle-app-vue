@@ -13,9 +13,9 @@ const { thread, handleGetThreads } = defineProps({
     type: Object,
     required: true,
   },
-  handleGetThreads: {
-    type: Function,
-  },
+  // handleGetThreads: {
+  //   type: Function,
+  // },
 });
 
 const store = useStore();
@@ -25,7 +25,7 @@ const user = computed(() => store.getters["authModules/currentUser"]);
 const handleDeletethread = async () => {
   try {
     await deleteThread(thread.id);
-    await handleGetThreads();
+    // await handleGetThreads();
     toast("Thread berhasil dihapus", {
       timeout: 2000,
       position: POSITION.TOP_CENTER,
@@ -88,8 +88,9 @@ const handleRedirectProfile = () => {
               <div class="flex gap-2 items-center">
                 <Like
                   :threadId="Number(thread.id)"
-                  :handleGetThreads="handleGetThreads"
+                  
                 />
+                <!-- :handleGetThreads="handleGetThreads" -->
                 <span class="text-sm md:text-md text-gray-400 font-medium">
                   {{ thread._count.like }} Likes
                 </span>
