@@ -58,7 +58,7 @@ onMounted(() => {
                 {{ threadDetail?.author?.username }}
               </p>
               <div class="w-1 h-1 md:w-2 md:h-2 rounded-full bg-gray-400"></div>
-              <p class="text-gray-400 text-sm md:text-md font-semibold">
+              <p class="text-gray-400 text-xs md:text-md font-semibold">
                 {{
                   threadDetail?.posted_at && formatTime(threadDetail.posted_at)
                 }}

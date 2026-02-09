@@ -20,6 +20,14 @@ const handleRedirectProfile = () => {
   }
   return "/my-profile";
 };
+
+const handleButtonFollows = computed(() => {
+  if (user.value?.id !== props.follows?.id) {
+    return true;
+  }
+  return false;
+})
+
 </script>
 
 <template>
@@ -44,7 +52,7 @@ const handleRedirectProfile = () => {
       </div>
     </div>
 
-    <div>
+    <div v-if="handleButtonFollows">
       <ButtonFollows :follows="props.follows" />
     </div>
   </div>

@@ -2,13 +2,22 @@
 import { assets } from "../assets/assets";
 import { useStore } from "vuex";
 import { RouterLink, useRouter } from "vue-router";
+import { ref } from "vue";
+import ConfirmModal from "./ConfirmModal.vue";
 
 const store = useStore();
 const router = useRouter();
 
+const showLogoutModal = ref(false);
+
 const handleLogout = () => {
-  store.commit("authModules/LOGOUT");
-  router.push("/login");
+  try {
+    store.commit("authModules/LOGOUT");
+    showLogoutModal.value = false;
+    router.push("/login");
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
@@ -60,20 +69,25 @@ const handleLogout = () => {
           </div>
   
           <!-- <div>
-              <button
-                class="bg-[#04A51E] text-white w-full py-3 rounded-3xl md:text-2xl text-xll font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
-              >
-                Create Post
-              </button>
-            </div> -->
+                  <button
+                    class="bg-[#04A51E] text-white w-full py-3 rounded-3xl md:text-2xl text-xll font-medium hover:bg-transparent  transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
+                  >
+                    Create Post
+                  </button>
+                </div> -->
         </div>
   
-        <div @click="handleLogout" class="flex items-center gap-5 hover:translate-1 transition-all duration-100">
-          <img class="md:w-10 w-8" :src="assets.Logout" alt="" />
-          <p class="md:text-2xl text-xl text-white font-medium hover:font-bold cursor-pointer">
-            Logout
-          </p>
+        <!-- Trigger -->
+        <div class="flex items-center gap-5 cursor-pointer
+             hover:translate-x-1 transition" @click="showLogoutModal = true">
+          <img class="md:w-10 w-8" :src="assets.Logout" />
+          <p class="md:text-2xl text-xl text-white font-medium">Logout</p>
         </div>
+  
+        <!-- Modal -->
+        <ConfirmModal v-model="showLogoutModal" title="Logout?" description="You will be signed out from your account."
+          confirm-text="Logout" confirm-color="bg-red-600 hover:bg-red-700" @confirm="handleLogout" />
+  
       </div>
     </div>
   </div>

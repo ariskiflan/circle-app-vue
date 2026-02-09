@@ -9,7 +9,6 @@ import { useRouter } from "vue-router";
 import ButtonFollows from "../components/ButtonFollows.vue";
 import ImagePreviewModal from "../components/ImagePreviewModal.vue";
 
-
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
@@ -30,7 +29,7 @@ const getProfile = async () => {
 };
 
 const handleFollows = () => {
-  router.push("/follows");
+  router.push({ name: 'Follows', query: { userId: id } });
 }
 
 const openPreview = (src) => {
@@ -112,7 +111,7 @@ onMounted(async () => {
         </div>
       </div>
   
-      <div class="grid grid-cols-2 gap-2 p-5">
+      <div v-else class="grid grid-cols-2 gap-2 p-5">
         <template v-for="thread in threadsByUserId" :key="thread.id">
           <img v-for="img in thread.image || []" :key="img.id" :src="img.image" alt="media" class="w-full"
             @click="openPreview(img.image)" />

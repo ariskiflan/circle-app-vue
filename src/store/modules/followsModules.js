@@ -23,18 +23,18 @@ export default {
     },
   },
   actions: {
-    async getFollower({ commit }) {
+    async getFollower({ commit }, followingId) {
       try {
-        const res = await getFollower();
+        const res = await getFollower(followingId);
         commit("setFollowers", res.data);
       } catch (err) {
         console.log(err);
       }
     },
 
-    async getFollowing({ commit }) {
+    async getFollowing({ commit }, followerId) {
       try {
-        const res = await getFollowing();
+        const res = await getFollowing(followerId);
         commit("setFollowings", res.data);
       } catch (err) {
         console.log(err);

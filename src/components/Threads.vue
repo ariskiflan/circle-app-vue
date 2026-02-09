@@ -9,6 +9,7 @@ import { deleteThread } from "../services/call/thread";
 import { POSITION, TYPE, useToast } from "vue-toastification";
 import { ref } from "vue";
 import ImagePreviewModal from "../components/ImagePreviewModal.vue";
+import ConfirmModal from "./ConfirmModal.vue";
 
 const { thread, handleGetThreads } = defineProps({
   thread: {
@@ -75,7 +76,7 @@ const openPreview = (src) => {
                 @{{ thread.author.username }}
               </p>
               <div class="w-1 h-1 md:w-2 md:h-2 rounded-full bg-gray-400"></div>
-              <p class="text-gray-400 text-sm md:text-md font-semibold">
+              <p class="text-gray-400 text-xs md:text-md font-semibold">
                 {{ formatTime(thread.posted_at) }}
               </p>
             </div>
@@ -119,41 +120,8 @@ const openPreview = (src) => {
             <Icon icon="material-symbols:delete-outline" width="24" height="24" />
           </div>
   
-          <Teleport to="body">
-            <Transition name="fade">
-              <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center">
-                <!-- overlay -->
-                <div class="absolute inset-0 bg-black/60" @click="showDeleteModal = false"></div>
-  
-                <!-- modal -->
-                <Transition name="scale">
-                  <div v-if="showDeleteModal" class="relative bg-[#1e1e1e] w-[90%] max-w-sm
-                     rounded-2xl p-5 z-10">
-                    <h3 class="text-white font-semibold text-lg mb-2">
-                      Delete thread?
-                    </h3>
-  
-                    <p class="text-gray-400 text-sm mb-6">
-                      This action cannot be undone.
-                    </p>
-  
-                    <div class="flex justify-end gap-3">
-                      <button @click="showDeleteModal = false" class="px-4 py-2 rounded-full text-sm
-                         hover:bg-white/10">
-                        Cancel
-                      </button>
-  
-                      <button @click="handleDeleteThread" class="bg-red-600 px-4 py-2 rounded-full
-                         text-sm font-medium hover:bg-red-700">
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                </Transition>
-              </div>
-            </Transition>
-          </Teleport>
-  
+          <ConfirmModal v-model="showDeleteModal" title="Delete thread?" description=" This action cannot be undone."
+            confirm-text="Delete" confirm-color="bg-red-600 hover:bg-red-700" @confirm="handleDeletethread" />
         </div>
       </div>
     </div>
@@ -161,28 +129,5 @@ const openPreview = (src) => {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
-}
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.scale-enter-active,
-.scale-leave-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.scale-enter-from {
-  transform: scale(0.95);
-  opacity: 0;
-}
-
-.scale-leave-to {
-  transform: scale(0.95);
-  opacity: 0;
-}
 </style>

@@ -10,6 +10,7 @@ import Rightbar from '../components/Rightbar.vue'
 import { assets } from "../assets/assets";
 import { RouterLink, useRouter } from "vue-router";
 import ModalAddThread from "../components/ModalAddThread.vue";
+import ConfirmModal from "../components/ConfirmModal.vue";
 
 const store = useStore();
 const router = useRouter();
@@ -22,6 +23,7 @@ const getThreads = async () => {
 };
 
 const showSidebar = ref(false);
+const showLogoutModal = ref(false);
 
 const openSidebar = () => {
   showSidebar.value = true;
@@ -32,8 +34,13 @@ const closeSidebar = () => {
 };
 
 const handleLogout = () => {
-  store.commit("authModules/LOGOUT");
-  router.push("/login");
+  try {
+    store.commit("authModules/LOGOUT");
+    showLogoutModal.value = false;
+    router.push("/login");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 onMounted(async () => {
@@ -43,7 +50,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div class="w-full">
+    <div class="w-full mb-20">
       <div class="sticky top-0 pt-10 z-10 bg-[#1d1d1d]">
   
         <div class="flex justify-between items-center mb-10 px-5">
@@ -97,9 +104,12 @@ onMounted(async () => {
           <img class="w-8" :src="assets.Like" alt="" />
         </RouterLink>
   
-        <div @click="handleLogout">
+        <div @click="showLogoutModal = true">
           <img class="w-8" :src="assets.Logout" alt="" />
         </div>
+
+         <ConfirmModal v-model="showLogoutModal" title="Logout?" description="You will be signed out from your account."
+          confirm-text="Logout" confirm-color="bg-red-600 hover:bg-red-700" @confirm="handleLogout" />
       </div>
     </div>
   

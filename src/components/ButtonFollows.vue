@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, watch, computed } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 import { createFollow } from "../services/call/follow";
 
 const props = defineProps({
@@ -11,9 +12,14 @@ const props = defineProps({
 });
 
 const store = useStore();
+const route = useRoute();
 const isFollowing = ref(false);
 
-const user = computed(() => store.getters["authModules/currentUser"]);
+const currentUser = computed(() => store.getters["authModules/currentUser"]);
+const targetUserId = computed(() => {
+  return route.query.userId ? Number(route.query.userId) : currentUser.value?.id;
+});
+
 
 const handleCreateFollows = async () => {
   try {
@@ -23,8 +29,12 @@ const handleCreateFollows = async () => {
 
     await store.dispatch("authModules/getProfile", token);
     await store.dispatch("authModules/getUserById", props.follows.id);
-    store.dispatch("followsModules/getFollowing");
-    store.dispatch("followsModules/getFollower");
+
+    if (targetUserId.value) {
+      store.dispatch("followsModules/getFollower", targetUserId.value);
+      store.dispatch("followsModules/getFollowing", targetUserId.value);
+    }
+
   } catch (err) {
     console.error(err);
   }
@@ -33,7 +43,7 @@ const handleCreateFollows = async () => {
 const checkIsFollowing = () => {
   try {
     // ✅ BENAR: Cek di user.following untuk followingId
-    const followings = user.value?.user?.following?.find(
+    const followings = currentUser.value?.user?.following?.find(
       (f) => f.followingId === props.follows.id
     );
     isFollowing.value = !!followings;
@@ -45,14 +55,12 @@ const checkIsFollowing = () => {
 onMounted(() => {
   checkIsFollowing();
 });
-watch([user, () => props.follows.id], checkIsFollowing);
+watch([currentUser, () => props.follows.id], checkIsFollowing);
 </script>
 
 <template>
-  <button
-    @click="handleCreateFollows"
-    class="flex border-2 border-white py-1 px-3 md:py-2 md:px-4 rounded-2xl text-white font-semibold cursor-pointer text-sm xl:text-md"
-  >
+  <button @click="handleCreateFollows"
+    class="flex border-2 border-white py-1 px-3 md:py-2 md:px-4 rounded-2xl text-white font-semibold cursor-pointer text-sm xl:text-md">
     {{ isFollowing ? "Unfollow" : "Follow" }}
   </button>
 </template>

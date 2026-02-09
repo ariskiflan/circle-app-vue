@@ -1,5 +1,7 @@
-import { getThreadByUserId, getThreads, getThreadByToken, getThreadById,
-  getReplies, } from "../../services/call/thread";
+import {
+  getThreadByUserId, getThreads, getThreadByToken, getThreadById,
+  getReplies,
+} from "../../services/call/thread";
 
 export default {
   namespaced: true,
@@ -7,15 +9,15 @@ export default {
     threadByUserId: {},
     threads: {},
     threadByUserToken: {},
-    threadDetail: null,   
-    replies: [],          
+    threadDetail: null,
+    replies: [],
   }),
   getters: {
     threadByUserId: (state) => state.threadByUserId,
     threads: (state) => state.threads,
     threadByUserToken: (state) => state.threadByUserToken,
-    threadDetail: (state) => state.threadDetail, 
-    replies: (state) => state.replies,  
+    threadDetail: (state) => state.threadDetail,
+    replies: (state) => state.replies,
   },
   mutations: {
     setThreadByUserId(state, payload) {
@@ -25,13 +27,13 @@ export default {
       state.threads = payload;
     },
     setThreadByUserToken(state, payload) {
-      state.threadByUserToken = payload; 
+      state.threadByUserToken = payload;
     },
     setThreadDetail(state, payload) {
-      state.threadDetail = payload; 
+      state.threadDetail = payload;
     },
     setReplies(state, payload) {
-      state.replies = payload; 
+      state.replies = payload;
     },
   },
   actions: {

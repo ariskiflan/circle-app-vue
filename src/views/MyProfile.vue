@@ -115,9 +115,7 @@ onMounted(() => {
           <Threads
             :thread="item"
           />
-
             <!-- :handleGetThreads="handleGetThreadsByUserToken" -->
-
         </div>
       </template>
 

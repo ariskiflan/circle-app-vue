@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { assets } from "../assets/assets";
 import { useStore } from "vuex";
+import { Icon } from '@iconify/vue';
 
 const store = useStore();
 
@@ -28,7 +29,7 @@ const user = computed(() => store.getters["authModules/currentUser"]);
         </button>
       </div>
   
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col lg:gap-2 gap-1">
         <p class="text-md md:text-xl font-semibold">{{ user.user.fullname }}</p>
         <span class="text-gray-400 font-semibold text-md">
           @{{ user.user.username }}

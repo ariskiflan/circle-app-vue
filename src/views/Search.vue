@@ -39,6 +39,10 @@ const handleRedirectProfile = (users) => {
   return user.value.id != users?.id ? `/profile/${users.id}` : "/my-profile";
 };
 
+const handleButtonFollows = (item) => {
+  return user.value?.id !== item?.id;
+};
+
 onMounted(() => {
   handleSearchUsers();
 });
@@ -86,7 +90,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <div>
+          <div v-if="handleButtonFollows(item)">
             <ButtonFollows :follows="item" />
           </div>
         </div>

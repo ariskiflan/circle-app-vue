@@ -38,10 +38,14 @@ const year = new Date().getFullYear();
   
   <!-- Footer Mobile -->
   <div class="block xl:hidden">
-    <div class="bg-[#262626] p-4 rounded-2xl flex flex-col gap-4 text-center">
-      <p class="text-xs font-semibold">
-        Developed by <span class="font-bold">@arskflnm</span>
-      </p>
+    <div class="bg-[#262626] p-4 rounded-2xl flex flex-col gap-2 text-center">
+      <div class="flex items-center gap-2 justify-center">
+        <p class="text-xs font-semibold">
+          Developed by <span class="font-bold">@arskflnm</span>
+        </p>
+        <span class="text-xs text-gray-400">{{ year }}</span>
+      </div>
+  
   
       <div class="flex justify-center gap-4">
         <Icon icon="mdi:instagram" width="22" height="22" />
@@ -55,7 +59,6 @@ const year = new Date().getFullYear();
         <span>Dumbways</span>
       </div>
   
-      <span class="text-xs text-gray-400">{{ year }}</span>
     </div>
   </div>
 </template>
