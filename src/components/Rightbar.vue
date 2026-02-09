@@ -9,8 +9,8 @@ const router = useRoute();
 
 <template>
   <div>
-    <div className="text-white h-screen border-l-2 border-gray-500 p-10">
-      <div className="flex flex-col gap-5">
+    <div className="text-white h-screen xl:border-l-2 border-gray-500 px-5 py-10 md:px-10">
+      <div className="flex flex-col gap-3">
         <div v-if="router.path != '/my-profile'">
           <Profile />
         </div>

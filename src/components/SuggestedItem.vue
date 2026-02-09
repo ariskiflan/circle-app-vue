@@ -25,18 +25,18 @@ const goProfile = async () => {
   <div>
     <div className="flex items-center gap-5 justify-between">
       <div @click="goProfile">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 md:gap-5">
           <img
             :src="suggestedUsers.profile?.avatar || assets.Avatar"
             alt=""
-            className="w-10 cursor-pointer"
+            className="w-8 md:w-10 cursor-pointer"
           />
 
           <div>
-            <p className="text-md font-semibold">
+            <p className="text-sm md:text-md font-semibold">
               {{ suggestedUsers.fullname }}
             </p>
-            <span className="text-gray-400 font-normal text-md">
+            <span className="text-gray-400 font-normal text-sm md:text-md">
               @{{ suggestedUsers.username }}
             </span>
           </div>

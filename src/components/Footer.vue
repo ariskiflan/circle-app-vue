@@ -6,37 +6,56 @@ const year = new Date().getFullYear();
 </script>
 
 <template>
-  <div>
-    <div className="bg-[#262626] p-5 rounded-2xl flex flex-col gap-2">
-      <div className="flex items-center gap-3">
-        <p className="text-sm font-semibold">
-          Developed by <span className="font-bold">@arskflnm</span>
+  <!-- Footer Web & Tablet -->
+  <div class="hidden xl:block">
+    <div class="bg-[#262626] px-5 py-2 rounded-2xl flex flex-col gap-1">
+      <div class="flex items-center gap-3 flex-wrap">
+        <p class="text-sm font-semibold">
+          Developed by <span class="font-bold">@arskflnm</span>
         </p>
-        <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-        <div className="flex gap-3 items-center">
-          <div>
-            <Icon icon="mdi:instagram" width="24" height="24" />
-          </div>
-          <div>
-            <Icon icon="mdi:github" width="24" height="24" />
-          </div>
-          <div>
-            <Icon icon="ic:baseline-facebook" width="24" height="24" />
-          </div>
+  
+        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+  
+        <div class="flex gap-3 items-center">
+          <Icon icon="mdi:instagram" width="22" height="22" />
+          <Icon icon="mdi:github" width="22" height="22" />
+          <Icon icon="ic:baseline-facebook" width="22" height="22" />
         </div>
       </div>
-
-      <div className="flex gap-3 items-center">
-        <p className="flex items-center gap-2 text-sm">
+  
+      <div class="flex gap-3 items-center">
+        <p class="flex items-center gap-2 text-sm">
           Powered by
-          <img :src="assets.FooterLogo" alt="" className="w-7" /> Dumbways
-          Indonesia
+          <img :src="assets.FooterLogo" alt="" class="w-7" />
+          Dumbways Indonesia
         </p>
-
-        <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-
-        <span>{{year}}</span>
+  
+        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+        <span class="text-sm">{{ year }}</span>
       </div>
+    </div>
+  </div>
+  
+  <!-- Footer Mobile -->
+  <div class="block xl:hidden">
+    <div class="bg-[#262626] p-4 rounded-2xl flex flex-col gap-4 text-center">
+      <p class="text-xs font-semibold">
+        Developed by <span class="font-bold">@arskflnm</span>
+      </p>
+  
+      <div class="flex justify-center gap-4">
+        <Icon icon="mdi:instagram" width="22" height="22" />
+        <Icon icon="mdi:github" width="22" height="22" />
+        <Icon icon="ic:baseline-facebook" width="22" height="22" />
+      </div>
+  
+      <div class="flex justify-center items-center gap-2 text-xs">
+        <span>Powered by</span>
+        <img :src="assets.FooterLogo" alt="" class="w-6" />
+        <span>Dumbways</span>
+      </div>
+  
+      <span class="text-xs text-gray-400">{{ year }}</span>
     </div>
   </div>
 </template>
