@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
         </p>
   
         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
-        <span class="text-sm">{{ year }}</span>
+        <span class="text-sm text-white font-semi-bold">{{ year }}</span>
       </div>
     </div>
   </div>
@@ -43,15 +43,15 @@ const year = new Date().getFullYear();
         <p class="text-xs font-semibold">
           Developed by <span class="font-bold">@arskflnm</span>
         </p>
-        <span class="text-xs text-gray-400">{{ year }}</span>
+        <span class="text-xs text-white font-semi-bold">{{ year }}</span>
       </div>
   
   
-      <div class="flex justify-center gap-4">
+      <!-- <div class="flex justify-center gap-4">
         <Icon icon="mdi:instagram" width="22" height="22" />
         <Icon icon="mdi:github" width="22" height="22" />
         <Icon icon="ic:baseline-facebook" width="22" height="22" />
-      </div>
+      </div> -->
   
       <div class="flex justify-center items-center gap-2 text-xs">
         <span>Powered by</span>

@@ -8,6 +8,7 @@ import { Icon } from '@iconify/vue';
 import { useRouter } from "vue-router";
 import ButtonFollows from "../components/ButtonFollows.vue";
 import ImagePreviewModal from "../components/ImagePreviewModal.vue";
+import ModalEditProfile from "../components/ModalEditProfile.vue";
 
 const router = useRouter();
 const route = useRoute();

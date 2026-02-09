@@ -62,49 +62,33 @@ const handleImage = () => {
 </script>
 
 <template>
-  <div class="border-b-2 border-gray-500 sm:p-5 p-3 w-full flex flex-col gap-4">
-    <div class="flex items-center gap-5 w-full">
-      <!-- <router-link :to="`/profile/${user?.userId}`"> -->
-      <div class="hidden sm:block w-10 h-10  rounded-full object-cover overflow-hidden">
-        <img :src="user?.avatar || assets.Profile" alt="avatar" />
+  <div class="border-b-2 border-gray-500 sm:p-5 p-5 w-full flex flex-col gap-4">
+    <div class="flex items-center gap-3 md:gap-5 w-full">
+  
+      <div class="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden">
+        <img class="object-cover w-full h-full" :src="user?.avatar || assets.Profile" alt="avatar" />
       </div>
-
-      <!-- </router-link> -->
-
+    
       <div class="flex-1 flex items-center gap-3">
-        <input
-          v-model="postThreads.content"
-          type="text"
-          class="flex-1 sm:text-xl text-md text-white bg-transparent px-4 py-2 outline-none"
-          :placeholder="
-            route.path === '/' ? `What's on your mind?` : 'Type Your Reply'
-          "
-        />
-
+        <input v-model="postThreads.content" type="text"
+          class="flex-1 sm:text-xl text-sm text-white bg-transparent pr-4 py-2 outline-none" :placeholder="
+              route.path === '/' ? `What's on your mind?` : 'Type Your Reply'
+            " />
+  
         <button @click="handleImage" type="button">
           <!-- ✅ File input tidak bisa langsung v-model,
-               tapi kita bisa tetap simpan ke postThreads.image via @change -->
-          <input
-            multiple
-            name="image"
-            ref="inputRef"
-            type="file"
-            class="hidden"
-            @change="handleImageChange"
-          />
+                 tapi kita bisa tetap simpan ke postThreads.image via @change -->
+          <input multiple name="image" ref="inputRef" type="file" class="hidden" @change="handleImageChange" />
           <img :src="assets.GaleryAdd" alt="" class="w-6 sm:w-8 cursor-pointer" />
         </button>
-
-        <button
-          @click="handlePostThreads"
-          type="submit"
-          class="bg-[#04A51E] text-white px-3 py-1 sm:px-6 sm:py-2 rounded-3xl text-sm font-medium hover:bg-transparent transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer"
-        >
+  
+        <button @click="handlePostThreads" type="submit"
+          class="bg-[#04A51E] text-white px-3 py-1 sm:px-6 sm:py-2 rounded-3xl text-sm font-medium hover:bg-transparent transition-all duration-100 ease-in-out hover:[box-shadow:inset_0_0_0_2px_white] cursor-pointer">
           Post
         </button>
       </div>
     </div>
-
+  
     <div v-if="preview.length" class="grid grid-cols-2 gap-2 mt-2">
       <div v-for="(item, index) in preview" :key="index">
         <img class="w-full" :src="item" alt="preview" />
